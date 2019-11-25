@@ -1,0 +1,3 @@
+azure-functions
+tweepy #https://github.com/tweepy/tweepy
+pyodbc
