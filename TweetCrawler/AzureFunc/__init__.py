@@ -148,6 +148,5 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
              "from twitter name e.g.1: https://...==&name=ChristineNEvans" + "\n" +
              "from twitter ID   e.g.2: https://...==&name=92454905" + "\n" + "\n" +
              "After enter the query through URL HTTPtrigger, please wait 2~3 minutes and thanks for your time." + "\n" +
-             "@by Mike",
-             status_code=400
+             "@by Mike"
         )
