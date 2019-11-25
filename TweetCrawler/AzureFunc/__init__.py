@@ -11,10 +11,10 @@ import logging
 import azure.functions as func
 		
 ### connect to Azure dB
-server = 'hmhs1.database.windows.net'
-database = 'hmhd1'
-username = 'hmh371'
-password = 'Abcd1234'
+server = '<servername>'
+database = '<database>'
+username = '<username>'
+password = '<password>'
 driver= '{ODBC Driver 17 for SQL Server}'
 cnxn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password)
 cursor = cnxn.cursor()
@@ -22,10 +22,10 @@ sql = "Insert into twitterdata(twitter_id, follower_id, tweet_id, tweet_text) va
 
 
 ### Twitter API setting for authorized
-consumer_key = "VTAnUmREFcD7AiE19QpCFtruK"
-consumer_secret = "KHTDL3gS05mfEY50jHVmBmpHzDTP8f8NhfKfc5XuyCQbCMaPBa"
-access_key = "4236113834-K04NuxAAgpNKCsiFPcRbBBKoqCSwUrmPxx9IOu0"
-access_secret = "dL05btpSl6jB5zvqY7M2eOXdkzrEn5n8AVRyYHSCVckjZ"
+consumer_key = "<consumer_key>"
+consumer_secret = "<consumer_secret>"
+access_key = "<access_key>"
+access_secret = "<access_secret>"
 
 
 ### Twitter Scripter main func
@@ -107,15 +107,7 @@ def get_all_tweets(cursor, screen_name):
 			cursor.execute(sql, outtweets_temp[-1]);
 			cnxn.commit()
 			outtweets.extend(outtweets_temp)
-        
-        # skip write to excel part
-    	#write the csv	
-		#with open('%s_tweets.csv' % screen_name, 'w') as f:
-		#	writer = csv.writer(f)
-    		#writer.writerow(["id","created_at","text"])
-		#	writer.writerow(["twitter_id","follower_id","tweet_id","tweet_text"])
-		#	writer.writerows(outtweets)
-		pass
+        	pass
 
 	return outtweets
 
@@ -146,9 +138,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
              "The parsed results are stored into Azure database..." + "\n" + "\n" + 
              "And each tweet be shown in each row with the following format:" + "\n" +
              "twitter_id,follower_id,tweet_id,tweet_text" + "\n" +
-             "@by Hsia-Ming Hsu" + "\n" + "\n" +
-             f"Script twitter ID: {s}!",
-             status_code=400
+             "@by Mike" + "\n" + "\n" +
+             f"Script twitter ID: {s}!"
         )
     else:
         return func.HttpResponse(
@@ -157,6 +148,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
              "from twitter name e.g.1: https://...==&name=ChristineNEvans" + "\n" +
              "from twitter ID   e.g.2: https://...==&name=92454905" + "\n" + "\n" +
              "After enter the query through URL HTTPtrigger, please wait 2~3 minutes and thanks for your time." + "\n" +
-             "@by Hsia-Ming Hsu",
+             "@by Mike",
              status_code=400
         )
